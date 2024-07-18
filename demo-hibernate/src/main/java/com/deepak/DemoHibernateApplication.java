@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoHibernateApplication 
 {
 
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		SpringApplication.run(DemoHibernateApplication.class, args);
 		System.out.println("This project works on the CRUD application using DAO");
 	}
