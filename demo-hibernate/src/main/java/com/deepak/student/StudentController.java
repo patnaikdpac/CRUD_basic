@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 
+
+
+
+
 @RestController
 @RequestMapping("/student/v1")
 public class StudentController 
@@ -63,4 +67,42 @@ public class StudentController
 		dao.deleteById(id);
 		return "Delete Success!!!";
 	}
+	
+	@GetMapping("/all")
+	public List<Student> getAll() {
+		return dao.getAll();
+	}
+	
+	@GetMapping("/all/{id}")
+	public List<Student> getAllById(@PathVariable Long id) 
+	{
+		return dao.getAllById(id);
+	}
+	
+	@GetMapping("/all/{id}/{mobile}")
+	public List<Student> getAllByIdMob(@PathVariable Long id, @PathVariable String mobile) 
+	{
+		return dao.getAllByIdMob(id, mobile);
+	}
+	
+	
+	@PutMapping("/edit/{id}/{mail}")
+	public int editStudentMail(@PathVariable String mail, @PathVariable Long id) 
+	{
+		
+		return dao.editStudentMail(id, mail);
+	}
+	
+	@DeleteMapping("/purge/{id}")
+	public int deleteStudentId(@PathVariable Long id)
+	{
+		return dao.deleteStudentId(id);
+	}
+	
+	@GetMapping("/get/{mobile}")
+	public Optional<Student> getAllByMob(@PathVariable String mobile) 
+	{
+		return dao.getAllByMob(mobile);
+	}
+	
 }
