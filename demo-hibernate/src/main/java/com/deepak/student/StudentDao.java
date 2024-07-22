@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -39,4 +40,13 @@ public interface StudentDao extends CrudRepository<Student, Long>
 	
 	@Query(value = "SELECT * FROM student s WHERE s.mobile= :mobile", nativeQuery = true)
 	Optional<Student> getAllByMob(@Param("mobile") String mobile);
+
+	@Procedure(name = "Student.getAllStuData")
+	List<Student> getAllStuData();
+
+	@Procedure(name = "Student.getStudentsById")
+	List<Student> getStudentsById(Long id);
+
+	@Procedure(name = "Student.getStudentNameById")
+	String getStudentNameById(Long id);
 }

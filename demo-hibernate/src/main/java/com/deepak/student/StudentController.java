@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +21,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 
-
-
+@Slf4j
+@Transactional
 @RestController
 @RequestMapping("/student/v1")
 public class StudentController 
@@ -103,6 +107,26 @@ public class StudentController
 	public Optional<Student> getAllByMob(@PathVariable String mobile) 
 	{
 		return dao.getAllByMob(mobile);
+	}
+	
+	@GetMapping("/getAllStuData")
+	public List<Student> getAllStuData() 
+	{
+		return dao.getAllStuData();
+	}
+	
+	@GetMapping("/getStudentsById/{id}")
+	public List<Student> getStudentsById(@PathVariable Long id)
+	{
+		return dao.getStudentsById(id);
+	}
+	
+	@GetMapping("/getStudentNameById/{id}")
+	public String getStudentNameById(@PathVariable Long id)
+	{
+		String s_name = dao.getStudentNameById(id);
+		log.info("Name: " +s_name);
+		return s_name;
 	}
 	
 }
